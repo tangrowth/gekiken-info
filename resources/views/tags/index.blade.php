@@ -11,7 +11,7 @@
     <a href="/"><h1>衣装進捗報告</h1></a>
     <nav>
       <ul>
-        <li><a href="/">検索</a></li>
+        <li><a href="/search">検索</a></li>
         @if (Auth::check())
         <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="header_top_btn">ログアウト</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -30,7 +30,7 @@
       <h2>{{$tags->tag}}投稿一覧</h2>
       @foreach ($posts as $post)
       <div class="card">
-          <h3><a href="">{{ $post->title }}</a></h3>
+          <h3><p>{{ $post->title }}</p></h3>
           <p>{{$post->content}}</p>
           <a href="../users/{{$post->user_id}}">{{$post->user->name}}</a>
           <a href="../tags/{{$post->tag_id}}">{{$post->tag->tag}}</a>

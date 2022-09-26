@@ -30,7 +30,7 @@
       <h2>一覧</h2>
       @foreach ($posts as $post)
       <div class="card">
-          <h3><a href="">{{ $post->title }}</a></h3>
+          <h3><p>{{ $post->title }}</p></h3>
           <p>{{$post->content}}</p>
           <a href="users/{{$post->user_id}}">{{$post->user->name}}</a>
           <a href="tags/{{$post->tag_id}}">{{$post->tag->tag}}</a>

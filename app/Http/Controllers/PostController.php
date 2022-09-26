@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ClientRequest;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -18,7 +18,7 @@ class PostController extends Controller
         return view('index', ['posts'=>$posts, 'user'=>$user,'tags'=>$tags]);
     }
 
-    public function post(ClientRequest $request, Post $post){
+    public function post(PostRequest $request, Post $post){
         $post->user_id = Auth::id();
         $form = $request->all();
         $form['user_id'] = Auth::id();
