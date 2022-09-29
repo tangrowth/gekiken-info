@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::with(['user','tag'])->paginate(10);;
+        $posts = Post::with(['user','tag'])->orderBy('created_at', 'desc')->paginate(10);
         $tags = Tag::all();
         $user = Auth::user();
         return view('index', ['posts'=>$posts, 'user'=>$user,'tags'=>$tags]);
@@ -34,11 +34,19 @@ class PostController extends Controller
     public function search(Request $request)
     {
         $tags = Tag::all();
-        $posts = Post::where('content', 'LIKE BINARY',"%{$request->input}%")->orwhere('title', 'LIKE BINARY',"%{$request->input}%")->get();
+        $posts = Post::where('content', 'LIKE BINARY',"%{$request->input}%")
+        ->orwhere('title', 'LIKE BINARY',"%{$request->input}%")
+        ->orderBy('created_at', 'desc')
+        ->get();
         $param = [
             'input' => $request->input,
             'posts' => $posts
         ];
         return view('search', $param,['tags' => $tags]);
+    }
+    public function delete($id){
+        $post = post::findOrFail($id);
+        $post->delete();
+        return redirect('/');
     }
 }

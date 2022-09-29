@@ -14,7 +14,7 @@ class TagController extends Controller
     public function index(Tag $tag){
         $tags = Tag::find($tag->id);
         $categories = Tag::all();
-        $posts = Post::where('tag_id', $tags->id)->paginate(10);
+        $posts = Post::where('tag_id', $tags->id)->orderBy('created_at', 'desc')->paginate(10);
         return view('tags.index',['tags'=>$tags, 'posts'=>$posts, 'categories'=>$categories]);
     }
 }

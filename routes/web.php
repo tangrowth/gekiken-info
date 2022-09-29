@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [PostController::class, 'index']);
 Route::post('/', [PostController::class, 'post']);
+Route::post('/delete/{post}', [PostController::class, 'delete']);
 
 Route::get('/search',[PostController::class, 'show']);
 Route::post('/search',[PostController::class, 'search']);
