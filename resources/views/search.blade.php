@@ -44,7 +44,7 @@
         @foreach ($posts as $post)
         <div class="main_left-card">
           <h3 class="main_card-title">{{ $post->title }}</h3>
-          <p>{{ $post->content }}</p>
+          <p>{!! nl2br(htmlspecialchars($post->content)) !!}</p>
           <div class="main_card-info">
             <div>
               <a href="users/{{$post->user_id}}" class="main_card-tag">{{$post->user->name}}</a>
