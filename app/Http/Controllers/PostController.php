@@ -34,6 +34,7 @@ class PostController extends Controller
     public function search(Request $request)
     {
         $tags = Tag::all();
+        $user = Auth::user();
         $posts = Post::where('content', 'LIKE BINARY',"%{$request->input}%")
         ->orwhere('title', 'LIKE BINARY',"%{$request->input}%")
         ->orderBy('created_at', 'desc')
@@ -42,7 +43,7 @@ class PostController extends Controller
             'input' => $request->input,
             'posts' => $posts
         ];
-        return view('search', $param,['tags' => $tags]);
+        return view('search', $param,['tags' => $tags, 'user' => $user]);
     }
     public function delete($id){
         $post = post::findOrFail($id);

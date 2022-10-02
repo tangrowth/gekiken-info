@@ -15,7 +15,9 @@ class UserController extends Controller
     public function index(User $user){
         $users = User::find($user->id);
         $user_id = Auth::id();
+        $user = Auth::user();
+        $member = User::all();
         $posts = Post::where('user_id', $users->id)->orderBy('created_at', 'desc')->paginate(10);
-        return view('users.show',['users'=>$users, 'posts'=>$posts, 'user_id'=>$user_id]);
+        return view('users.show',['users'=>$users, 'posts'=>$posts, 'user_id'=>$user_id, 'user' =>$user, 'member' =>$member]);
     }
 }

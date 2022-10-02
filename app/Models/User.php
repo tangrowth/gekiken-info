@@ -46,4 +46,10 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class);
     }
+    public function rules()
+    {
+        return [
+            'email' => 'email:filter,dns'
+        ];
+    }
 }
